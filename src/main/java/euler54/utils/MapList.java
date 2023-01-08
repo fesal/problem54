@@ -1,6 +1,8 @@
 package euler54.utils;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Singular;
 
 import java.util.*;
 
@@ -8,8 +10,9 @@ import java.util.*;
  *  @author Fesal.Baxhaku
  */
 @Data
+@Builder
 public class MapList<K,V> {
-
+    @Singular("mapList")
     private final Map<K, List<V>> mapList = new HashMap<>();
 
     public V add(K key, V value) {

@@ -1,5 +1,6 @@
 package controller;
 
+import data.MapListData;
 import euler54.controller.GameController;
 import euler54.controller.PokerHandController;
 import euler54.model.*;
@@ -12,21 +13,9 @@ public class GameControllerTest {
 
     @Test
     public void testPlayBy2Players() {
-        MapList<Integer, Card> pl = new MapList<>();
-        pl.add(0, new Card(CardSuit.SPADE, CardNumber.TWO));
-        pl.add(0, new Card(CardSuit.HEART, CardNumber.TWO));
-        pl.add(0, new Card(CardSuit.HEART, CardNumber.NINE));
-        pl.add(0, new Card(CardSuit.HEART, CardNumber.FOUR));
-        pl.add(0, new Card(CardSuit.CLUB, CardNumber.NINE));
+        MapList<Integer, Card> pl = MapListData.mapListData();
 
-        pl.add(1, new Card(CardSuit.SPADE, CardNumber.TWO));
-        pl.add(1, new Card(CardSuit.CLUB, CardNumber.NINE));
-        pl.add(1, new Card(CardSuit.HEART, CardNumber.NINE));
-        pl.add(1, new Card(CardSuit.DIAMOND, CardNumber.NINE));
-        pl.add(1, new Card(CardSuit.DIAMOND, CardNumber.TWO));
-
-
-        PokerHandController phc = new PokerHandController();
+        PokerHandController phc = PokerHandController.builder().build();
         GameController gc = new GameController(phc);
 
         MapList<Integer, PokerHand> result = gc.playBy2Players(pl);

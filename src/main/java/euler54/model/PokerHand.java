@@ -1,6 +1,7 @@
 package euler54.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  */
 @AllArgsConstructor
 @Data
+@Builder
 public class PokerHand {
     private final PokerHandType handPowerType;
     private final List<CardNumber> cardNumbers;

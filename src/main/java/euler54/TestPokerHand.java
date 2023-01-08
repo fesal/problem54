@@ -14,12 +14,12 @@ public class TestPokerHand {
 
         String filePath = "src/main/resources/";
         String fileName = "p054_poker.txt";
-        PokerHandController c = new PokerHandController();
+        PokerHandController c = PokerHandController.builder().build();
         GameController g = new GameController(c);
         MapList<Integer, Card> mapList = FileReaderUtils.readCardFile(filePath, fileName);
 
         for(int i = 0; i < mapList.size(); i += 2) {
-            MapList<Integer, Card> twoPlayers = new MapList<>();
+            MapList<Integer, Card> twoPlayers = MapList.<Integer, Card>builder().build();
             twoPlayers.addAll(0, mapList.get(i));
             twoPlayers.addAll(1, mapList.get(i+1));
 

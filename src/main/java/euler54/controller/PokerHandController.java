@@ -1,7 +1,9 @@
 package euler54.controller;
 
 import euler54.model.*;
+import euler54.utils.CardList;
 import euler54.utils.MapList;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.*;
@@ -11,6 +13,7 @@ import java.util.stream.Collectors;
  *  @author Fesal.Baxhaku
  */
 @Data
+@Builder
 public class PokerHandController {
     private static final int FOUR_OF_KIND = 4,
                              THREE_OF_KIND = 3,
@@ -194,7 +197,7 @@ public class PokerHandController {
      * @return grouped card suits by number
      */
     public MapList<CardNumber, CardSuit> getNumberGroup(List<Card> cards) {
-        MapList<CardNumber, CardSuit> numberGroup = new MapList<>();
+        MapList<CardNumber, CardSuit> numberGroup = MapList.<CardNumber, CardSuit>builder().build();
         for (Card card : cards) {
             numberGroup.add(card.getCardNumber(), card.getCardSuit());
         }
@@ -202,7 +205,7 @@ public class PokerHandController {
     }
 
     public MapList<CardSuit, CardNumber> getSuitGroup(List<Card> cards) {
-        MapList<CardSuit, CardNumber> suitGroup = new MapList<>();
+        MapList<CardSuit, CardNumber> suitGroup = MapList.<CardSuit, CardNumber>builder().build();
         for (Card card : cards) {
             suitGroup.add(card.getCardSuit(), card.getCardNumber());
         }

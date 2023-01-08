@@ -1,14 +1,18 @@
 package euler54.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Singular;
 
 /*
  *  @author Fesal.Baxhaku
  */
 @Data
 @AllArgsConstructor
+@Builder
 public class Card implements Comparable<Card> {
+
     private final CardSuit cardSuit;
     private final CardNumber cardNumber;
 

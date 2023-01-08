@@ -32,7 +32,7 @@ public class GameController {
     }
 
     private MapList<Integer, PokerHand> pokerHandsWinner(List<PokerHand> pokerHands) {
-        MapList<Integer, PokerHand> winner = new MapList<>();
+        MapList<Integer, PokerHand> winner = MapList.<Integer, PokerHand>builder().build();
 
         for (int i = 1; i < pokerHands.size(); i++) {
             PokerHandType next = pokerHands.get(i).getHandPowerType();
@@ -55,7 +55,7 @@ public class GameController {
     private static MapList<Integer, PokerHand> checkHigherCards(int index, List<PokerHand> pokerHands, List<CardNumber> nextCards, List<CardNumber> currentCards) {
         Set<CardNumber> cn = ListUtils.findDuplicates(currentCards);
         Set<CardNumber> cn1 = ListUtils.findDuplicates(nextCards);
-        MapList<Integer, PokerHand> winner = new MapList<>();
+        MapList<Integer, PokerHand> winner = MapList.<Integer, PokerHand>builder().build();
         CardNumber player1, player2;
 
         if(cn.size() > 0 && cn1.size() > 0) {
