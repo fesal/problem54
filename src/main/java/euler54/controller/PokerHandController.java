@@ -52,7 +52,7 @@ public class PokerHandController {
         if(pokerHand != null)
             return pokerHand;
 
-        pokerHand = getTwoPairs(suitGroup);
+        pokerHand = getTwoPairs(cardNumberGroup);
         if(pokerHand != null)
             return pokerHand;
 
@@ -66,17 +66,18 @@ public class PokerHandController {
         return pokerHand;
     }
 
-    protected PokerHand getTwoPairs(MapList<CardSuit, CardNumber> cardNumberGroup) {
+    public PokerHand getTwoPairs(MapList<CardNumber, CardSuit> cardNumberGroup) {
         PokerHand pokerHand = null;
         int counter = 0;
         List<CardNumber> cardNumbers = new ArrayList<>();
         for(Map.Entry entry :cardNumberGroup.getMapList().entrySet()) {
-            CardSuit c = (CardSuit) entry.getKey();
-            List<CardNumber> cardNumberList = cardNumberGroup.get(c);
-            if(cardNumberList.size() == 2 && cardNumberList.get(0).getValue() == cardNumberList.get(1).getValue()) {
+            CardNumber c = (CardNumber) entry.getKey();
+            List<CardSuit> cardNumberList = cardNumberGroup.get(c);
+            if(cardNumberList.size() == 2) {
                 counter++;
+                cardNumbers.add(c);
             }
-            cardNumbers.addAll(cardNumberList);
+            cardNumbers.add(c);
         }
 
         if(counter == 2) {
