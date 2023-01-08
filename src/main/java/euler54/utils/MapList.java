@@ -2,10 +2,7 @@ package euler54.utils;
 
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /*
  *  @author Fesal.Baxhaku
@@ -20,6 +17,10 @@ public class MapList<K,V> {
         values.add(value);
 
         return value;
+    }
+
+    public void addAll(K key, List<V> values) {
+        mapList.put(key, values);
     }
 
     public List<V> get(K key) {
@@ -41,6 +42,7 @@ public class MapList<K,V> {
     }
 
     public List<K> getKeys() {
-        return (List<K>) mapList.keySet();
+        return new ArrayList<>(mapList.keySet());
     }
+
 }

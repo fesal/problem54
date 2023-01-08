@@ -1,6 +1,7 @@
 package euler54.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /*
  *  @author Fesal.Baxhaku
@@ -18,6 +19,8 @@ public enum PokerHandType {
     STRAIGHT_FLUSH("Straight Flush", 9),
     ROYAL_FLUSH("Royal Flush", 10);
 
+    @Getter
     private final String handName;
+    @Getter
     private final int power;
 }

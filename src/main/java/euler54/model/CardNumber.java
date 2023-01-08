@@ -18,7 +18,7 @@ public enum CardNumber {
     SEVEN("7", 7),
     EIGHT("8", 8),
     NINE("9", 9),
-    TEN("10", 10),
+    TEN("T", 10),
     JACK("J", 11),
     QUEEN("Q", 12),
     KING("K", 13),
@@ -30,4 +30,15 @@ public enum CardNumber {
     private final int value;
 
     public static final Comparator<CardNumber> cardNumberComparator = Comparator.comparingInt(CardNumber::getValue);
+
+    public static CardNumber findByValue(final String val){
+        CardNumber result = null;
+        for (CardNumber nr : values()) {
+            if (nr.symbol.equals(val)) {
+                result = nr;
+                break;
+            }
+        }
+        return result;
+    }
 }

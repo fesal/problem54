@@ -3,10 +3,11 @@ package euler54.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.Arrays;
+
 /*
  *  @author Fesal.Baxhaku
  */
-@AllArgsConstructor
 public enum CardSuit {
     HEART ('H'),
     DIAMOND ('D'),
@@ -14,5 +15,20 @@ public enum CardSuit {
     CLUB ('C');
 
     @Getter
-    private final char suitChar;
+    private char suitChar;
+
+    CardSuit(char suitChar) {
+        this.suitChar = suitChar;
+    }
+
+    public static CardSuit findByValue(final char val){
+        CardSuit result = null;
+        for (CardSuit suit : values()) {
+            if (suit.suitChar == val) {
+                result = suit;
+                break;
+            }
+        }
+        return result;
+    }
 }

@@ -60,7 +60,7 @@ public class PokerHandController {
         if(pokerHand != null)
             return pokerHand;
 
-        List<CardNumber> cardNumbers = getCardNumberList(cardNumberGroup);
+        List<CardNumber> cardNumbers = getSortedCardNumberList(cardNumberGroup);
         pokerHand = new PokerHand(PokerHandType.HIGH_CARD, cardNumbers);
 
         return pokerHand;
@@ -73,7 +73,7 @@ public class PokerHandController {
         for(Map.Entry entry :cardNumberGroup.getMapList().entrySet()) {
             CardSuit c = (CardSuit) entry.getKey();
             List<CardNumber> cardNumberList = cardNumberGroup.get(c);
-            if(cardNumberList.size() == 2) {
+            if(cardNumberList.size() == 2 && cardNumberList.get(0).getValue() == cardNumberList.get(1).getValue()) {
                 counter++;
             }
             cardNumbers.addAll(cardNumberList);
@@ -87,7 +87,7 @@ public class PokerHandController {
     }
 
     protected PokerHand getConsecutiveValues(MapList<CardNumber, CardSuit> cardNumberGroup) {
-        List<CardNumber> cardNumbers = getCardNumberList(cardNumberGroup);
+        List<CardNumber> cardNumbers = getSortedCardNumberList(cardNumberGroup);
         int max = cardNumbers.get(cardNumbers.size()-1).getValue();
         int min = cardNumbers.get(0).getValue();
         PokerHand pokerHand = null;
@@ -146,11 +146,12 @@ public class PokerHandController {
         PokerHand pokerHand = null;
         List<CardNumber> numbers = list.get(list.getKey());
         numbers.sort(CardNumber.cardNumberComparator);
-        int counter = 1;
+        int counter = 0;
         boolean isFlush = true;
         for(CardNumber cn: numbers) {
-            if((cn.getValue() - numbers.get(counter).getValue()) != 1 && counter > 4) {
+            if ((numbers.size() < 5 || counter > numbers.size() - 1)|| ((cn.getValue() - numbers.get(counter + 1).getValue()) != 1 || counter > 3)) {
                 isFlush = false;
+                break;
             }
             counter++;
         }
@@ -178,6 +179,7 @@ public class PokerHandController {
             List<CardSuit> cardSuits = numberCardGroup.get(c);
             if(cardSuits.size() == num) {
                 isTheSame = true;
+                cardNumbers.add(c);
             }
             cardNumbers.add(c);
         }
@@ -206,7 +208,7 @@ public class PokerHandController {
         return suitGroup;
     }
 
-    protected List<CardNumber> getCardNumberList(MapList<CardNumber, CardSuit> numberCardGroup) {
+    protected List<CardNumber> getSortedCardNumberList(MapList<CardNumber, CardSuit> numberCardGroup) {
         List<CardNumber> cardNumbers = new ArrayList<>();
         for(Map.Entry entry :numberCardGroup.getMapList().entrySet()) {
             CardNumber c = (CardNumber) entry.getKey();
